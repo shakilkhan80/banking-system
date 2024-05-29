@@ -1,6 +1,6 @@
 step-1
 
-git clone https://github.com/username/repository.git
+git clone https://github.com/shakilkhan80/banking-system.git
 cd repository
 
 step-2
