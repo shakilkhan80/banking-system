@@ -11,6 +11,9 @@
 
 <body>
     <div class="container mt-5">
+        <div>
+            <a href="/" class="btn btn-primary">Home</a>
+        </div>
         <h1>Banking System</h1>
         <div class="card mt-3">
             <div class="card-body">
