@@ -14,31 +14,49 @@
         <h1>Banking System</h1>
         <div class="card mt-3">
             <div class="card-body">
-                <h3>Balance: ${{ number_format($account->balance, 2) }}</h3>
+                @if ($account)
+                    <h3>Balance: ${{ number_format($account->balance, 2) }}</h3>
+                @else
+                    <h3>Account not found</h3>
+                @endif
             </div>
         </div>
 
-        <div class="mt-3">
-            <form action="/account/deposit" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="amount" class="form-label">Deposit Amount</label>
-                    <input type="number" step="0.01" class="form-control" id="amount" name="amount">
-                </div>
-                <button type="submit" class="btn btn-primary">Deposit</button>
-            </form>
-        </div>
+        @if ($account)
+            <div class="mt-3">
+                <form action="/account/deposit" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Deposit Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="amount" name="amount"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Deposit</button>
+                </form>
+            </div>
 
-        <div class="mt-3">
-            <form action="/account/withdraw" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="amount" class="form-label">Withdraw Amount</label>
-                    <input type="number" step="0.01" class="form-control" id="amount" name="amount">
+            <div class="mt-3">
+                <form action="/account/withdraw" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Withdraw Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="amount" name="amount"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Withdraw</button>
+                </form>
+            </div>
+            {{-- show erros --}}
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <button type="submit" class="btn btn-danger">Withdraw</button>
-            </form>
-        </div>
+            @endif
+        @endif
     </div>
 </body>
 
